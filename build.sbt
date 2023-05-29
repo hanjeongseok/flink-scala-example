@@ -13,8 +13,10 @@ assemblyMergeStrategy in assembly := {
 }
 
 // https://mvnrepository.com/artifact/org.apache.flink/flink-streaming-scala
-libraryDependencies += "org.apache.flink" %% "flink-streaming-scala" % "1.17.0" % "provided"
+libraryDependencies += "org.apache.flink" %% "flink-streaming-scala" % "1.14.6" % "provided"
 // https://mvnrepository.com/artifact/org.apache.flink/flink-clients
-libraryDependencies += "org.apache.flink" % "flink-clients" % "1.17.0"
+libraryDependencies += "org.apache.flink" %% "flink-clients" % "1.14.6"
 // https://mvnrepository.com/artifact/org.apache.flink/flink-connector-kafka
-libraryDependencies += "org.apache.flink" % "flink-connector-kafka" % "1.17.0"
+libraryDependencies += "org.apache.flink" %% "flink-connector-kafka" % "1.14.6"
+
+assembly / assemblyOption := (assembly / assemblyOption).value.copy(includeScala = true)

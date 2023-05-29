@@ -5,6 +5,9 @@ import org.apache.flink.connector.kafka.source.KafkaSource
 import org.apache.flink.connector.kafka.source.enumerator.initializer.OffsetsInitializer
 import org.apache.flink.streaming.api.scala._
 
+/**
+ * https://medium.com/@erkansirin/apache-flink-and-kafka-simple-example-with-scala-97f0b338ee36
+ */
 object Main {
   def main(args: Array[String]): Unit = {
     println("Hello world!")
@@ -13,9 +16,9 @@ object Main {
 
     // Adding KafkaSource
     val kafkaSource = KafkaSource.builder()
-      .setBootstrapServers("localhost: 9092")
-      .setTopics("flink - example")
-      .setGroupId("flink - consumer - group")
+      .setBootstrapServers("localhost:9092")
+      .setTopics("test")
+      .setGroupId("test-consumer-group")
       .setStartingOffsets(OffsetsInitializer.latest())
       .setValueOnlyDeserializer(new SimpleStringSchema())
       .build()
@@ -23,12 +26,12 @@ object Main {
     // Before sending Kafka we need to seralize our value
     val serializer = KafkaRecordSerializationSchema.builder()
       .setValueSerializationSchema(new SimpleStringSchema())
-      .setTopic("flink - example - out")
+      .setTopic("test-out")
       .build()
 
     // Adding KafkaSink
     val kafkaSink = KafkaSink.builder()
-      .setBootstrapServers("localhost: 9092")
+      .setBootstrapServers("localhost:9092")
       .setRecordSerializer(serializer)
       .build()
 
